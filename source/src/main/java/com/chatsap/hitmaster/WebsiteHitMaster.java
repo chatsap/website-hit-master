@@ -125,7 +125,7 @@ public class WebsiteHitMaster {
 		
 		long interRoundWaitTime = getInterRoundWaitTime(roundNumber);
 		System.out.println("==========> Round " + (roundNumber + 1) + " is over. Let's wait for " + interRoundWaitTime
-				+ " seconds before starting next round...");
+				+ " ms before starting next round...");
 		Thread.sleep(interRoundWaitTime);
 	}
 
@@ -142,7 +142,7 @@ public class WebsiteHitMaster {
 
 			driver.get(targetURL);
 			long watchTime = getVideoWatchTime(roundNumber);
-			System.out.println("==========> Browser is launched. Let's watch video for " + watchTime + " ms.");
+			System.out.println("==========> Round:"+(roundNumber+1)+" - Browser is launched. Let's watch video for " + watchTime + " ms.");
 			Thread.sleep(watchTime);
 			
 			// WebElement searchBox = driver.findElement(By.name("q"));
