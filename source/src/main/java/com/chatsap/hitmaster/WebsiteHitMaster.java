@@ -2,6 +2,8 @@ package com.chatsap.hitmaster;
 
 import java.io.File;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -99,11 +101,22 @@ public class WebsiteHitMaster {
 	}
 
 	public void run() throws Exception {
+		long startTime = System.currentTimeMillis();
 		for (int i = 0; i < maxHits; i++) {
 			startRound(i);
 
 		}
+		long endTimeTime = System.currentTimeMillis();
+		System.out.println("==========> All rounds are done. Total time taken is "+getTimeTaken(startTime, endTimeTime)+" . Thank you. See you again. ");
 
+	}
+
+	private String getTimeTaken(long startTime, long endTimeTime) {
+		int diff = (int)(endTimeTime-startTime);
+		int s = diff % 60;
+		int m = diff/60;
+		
+		return m+" minutes and "+s+" seconds";
 	}
 
 	private long getInterRoundWaitTime(int roundNumber) {
@@ -141,14 +154,15 @@ public class WebsiteHitMaster {
 			// WebDriver driver = new FirefoxDriver();
 
 			driver.get(targetURL);
+			
+			//WebElement youTubeVideo = driver.findElement(By.className(HitMasterConfig.getProperty("prop_name")));
+			//searchBox.sendKeys("ChromeDriver");
+			//youTubeVideo.submit();
+			// Thread.sleep(5000); // Let the user actually see something!
+			
 			long watchTime = getVideoWatchTime(roundNumber);
 			System.out.println("==========> Round:"+(roundNumber+1)+" - Browser is launched. Let's watch video for " + watchTime + " ms.");
 			Thread.sleep(watchTime);
-			
-			// WebElement searchBox = driver.findElement(By.name("q"));
-			// searchBox.sendKeys("ChromeDriver");
-			// searchBox.submit();
-			// Thread.sleep(5000); // Let the user actually see something!
 			driver.quit();
 		} catch (Throwable th) {
 			th.printStackTrace();
